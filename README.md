@@ -1,4 +1,4 @@
-# Hyperloop Awakening: A Non-Liquidative Lending Protocol with Option Attribution
+# Hyperloop Finance: A Non-Liquidative Lending Protocol with Option Attribution
 
 **Every crypto lending market before Awakening protected the lender by liquidating the borrower. Awakening protects the lender with math.**
 
