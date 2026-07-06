@@ -1,13 +1,18 @@
 # Hyperloop Awakening: A Non-Liquidative Lending Protocol with Option Attribution
 
-Hyperloop Awakening is on-chain credit for real balance sheets. It removes the single feature that has kept treasuries, family offices, and long-duration holders off DeFi — **path-dependent forced liquidation** — and replaces it with a per-loan put option whose payoff is guaranteed by construction.
+**Every crypto lending market before Awakening protected the lender by liquidating the borrower. Awakening protects the lender with math.**
 
-- **For Lenders:** Principal is protected by an attached put option, not by an oracle-triggered liquidation engine. **Zero bad debt** from cascades, no dependence on liquidator networks, and a settlement identity that pays $K$ per credit unit at maturity regardless of the terminal collateral price.
-- **For Borrowers:** No margin calls, no health checks, no interim liquidations. At maturity: **repay and reclaim, or walk away** — loss is bounded by the pre-paid put premium. Advance rates can meet or exceed 100% of spot, because there is no liquidation event to defend against.
-- **For Makers:** Publish executable, capital-efficient offers across many strikes and maturities using a single option book. Hedge externally on Deribit, Derive, IBIT-listed contracts, or bilateral OTC; the protocol only requires per-fill PAT delivery, not a standing hedge.
+The entire protocol reduces to a single identity, evaluated at loan maturity $T_M$:
 
-> [!TIP]
-> The full whitepaper is [here](./Whitepaper.pdf). The pitch deck for the DraperU × Cardano Hacker House cohort is in a separate private repository.
+$$\underbrace{\min(S_{T_M},\, K)}_{\text{collateral value}} \;+\; \underbrace{\max(K - S_{T_M},\, 0)}_{\text{put payoff}} \;=\; K$$
+
+This holds for every terminal collateral price $S_{T_M} \geq 0$. Each credit unit in a market pays exactly $K$ loan tokens at maturity, regardless of what the collateral does during the term. **No oracle read during the term. No health check. No margin call. No liquidator. Path-independent by construction.**
+
+Hyperloop Awakening is on-chain credit for real balance sheets. It removes the single feature that has kept treasuries, family offices, and long-duration holders off DeFi — **path-dependent forced liquidation** — and replaces it with a per-loan put option whose payoff is guaranteed by the identity above.
+
+- **For Lenders:** Principal is protected by an attached put option, not by an oracle-triggered liquidation engine. **Zero bad debt** from cascades. No dependence on liquidator networks. Per-unit recovery at maturity is $R(S_{T_M}) = \min(S_{T_M}, K) + \max(K - S_{T_M}, 0) = K$ — flat across every terminal price.
+- **For Borrowers:** No margin calls, no health checks, no interim liquidations. At maturity: **repay and reclaim, or walk away** — loss is bounded by the pre-paid put premium. The advance rate is set by the strike, not by expected volatility: $\text{maxDebt} = K$, and $K$ can meet or exceed spot.
+- **For Makers:** Publish executable offers across many strikes and maturities using a single option book. Break-even discount decomposes as $1 - P_{\text{offer}} \approx r_f \cdot \tau + P(K, \tau) + m \cdot \tau$ — hedge $P(K, \tau)$ externally on Deribit, Derive, IBIT-listed contracts, or bilateral OTC. The protocol only requires per-fill PAT delivery, not a standing hedge.
 
 ## Table of Contents
 
