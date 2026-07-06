@@ -4,7 +4,7 @@
 
 The entire protocol reduces to a single identity, evaluated at loan maturity $T_M$:
 
-$$\underbrace{\min(S_{T_M},\, K)}_{\text{collateral value}} \;+\; \underbrace{\max(K - S_{T_M},\, 0)}_{\text{put payoff}} \;=\; K$$
+$$\underbrace{\min(S_{T_M},\, K)}_{\text{collateral value}} + \underbrace{\max(K - S_{T_M},\, 0)}_{\text{put payoff}} = K$$
 
 This holds for every terminal collateral price $S_{T_M} \geq 0$. Each credit unit in a market pays exactly $K$ loan tokens at maturity, regardless of what the collateral does during the term. **No oracle read during the term. No health check. No margin call. No liquidator. Path-independent by construction.**
 
