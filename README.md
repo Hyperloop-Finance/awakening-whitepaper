@@ -4,7 +4,7 @@
 
 The entire protocol reduces to a single identity, evaluated at loan maturity $T_M$:
 
-$$\underbrace{\min(S_{T_M},\, K)}_{\text{collateral value}} + \underbrace{\max(K - S_{T_M},\, 0)}_{\text{put payoff}} = K$$
+$$\underbrace{\min(S_{T_M}, K)}_{\text{collateral value}} + \underbrace{\max(K - S_{T_M}, 0)}_{\text{put payoff}} = K$$
 
 This holds for every terminal collateral price $S_{T_M} \geq 0$. Each credit unit in a market pays exactly $K$ loan tokens at maturity, regardless of what the collateral does during the term. **No oracle read during the term. No health check. No margin call. No liquidator. Path-independent by construction.**
 
@@ -105,7 +105,7 @@ This single change has substantial consequences:
 
 Awakening is organized around **isolated, immutable markets with configurations that cannot be altered after creation**. Each market is uniquely specified by the tuple
 
-$$M = \langle \text{collateral},\, \text{loan},\, \text{oracle},\, T_M,\, K,\, \text{settlement},\, \text{gates} \rangle$$
+$$M = \langle \text{collateral}, \text{loan}, \text{oracle}, T_M, K, \text{settlement}, \text{gates} \rangle$$
 
 where:
 
@@ -147,7 +147,7 @@ The defining invariant of the protocol is: at maturity, each credit unit in a ma
 
 The invariant is sustained by attribution of put option positions to credit units. For a market with strike $K$, maturity $T_M$, collateral $C$, and loan asset $L$, the attached put has terminal payoff (per unit of collateral notional)
 
-$$\Pi(S_{T_M}) = \max(K - S_{T_M},\, 0)$$
+$$\Pi(S_{T_M}) = \max(K - S_{T_M}, 0)$$
 
 denominated in $L$. Combined with the collateral itself, the lender's per-unit recovery at $T_M$ is
 
@@ -324,7 +324,7 @@ The base Awakening market attaches a single option claim — a put — to each l
 
 A generalized Awakening market is specified by
 
-$$M = \langle \text{collateral},\, \text{loan},\, \text{oracle},\, T_M,\, K_{\text{put}},\, K_{\text{call}},\, \text{settlement},\, \text{gates} \rangle$$
+$$M = \langle \text{collateral}, \text{loan}, \text{oracle}, T_M, K_{\text{put}}, K_{\text{call}}, \text{settlement}, \text{gates} \rangle$$
 
 with $K_{\text{put}} \leq K_{\text{call}}$. The base product corresponds to $K_{\text{call}} = +\infty$. The settlement contract attributes both a long put (to the credit side) and a short call (to the debt side) at fill time.
 
