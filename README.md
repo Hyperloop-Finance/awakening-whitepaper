@@ -122,30 +122,7 @@ $$\text{maxDebt} = K$$
 
 The Awakening market is the central on-chain contract. Borrowers and lenders interact with the market directly. The **maker** is an off-protocol participant that mediates between the market and one or more external option venues: it sources put (and, in the generalized product of Section 11, call) positions externally and attributes them to the market at fill time. The oracle is a passive component, read only at maturity.
 
-```
-                       puts
-    External      <──────────       Maker
-    Option Venue  ──────────>       │
-    (Deribit/                       │  PAT +
-     Derive/IBIT)  premium          │  loan tokens
-                                    ▼
-    ┌─────────────────────────────────────────────┐
-    │           Awakening Market                  │
-    │   ⟨ collateral, loan, T_M, K ⟩              │
-    │   credit units ↔ debt units                 │
-    │   PAT inventory                             │
-    └─────────────────────────────────────────────┘
-      ▲                                    ▲
-      │ funding ↔ credit / payout          │ collateral ↔ loan / debt
-      │                                    │
-    Lender                              Borrower
-
-                                        Oracle
-                                          │
-                                          │ S(T_M) at T_M
-                                          ▼
-                                       Settlement
-```
+![Figure 1: Awakening protocol architecture](./images/figure1-architecture.png)
 
 The oracle is read only at $T_M$; there is no interim oracle path that triggers forced action on borrower positions.
 
@@ -238,16 +215,7 @@ At $T_M$, the market's settlement contract executes the following sequence, atom
 5. Aggregate PAT settlement: redeem all PATs in the market, receiving $X_{T_M} \cdot \Pi(S_{T_M})$ in loan tokens from the PAT sources.
 6. Open the *repayment window*.
 
-```
-   T_0        fill              T_M        T_M + W       final
-    │─────────│─────────────────│──────────│────────────│
-    market    maker delivers    oracle     repay        collateral
-    creation  loan + PAT        read,      window       disposition
-                                PAT        closes
-                                settles
-              │←── loan term: no health checks, ──→│
-                  no margin calls, no liquidations
-```
+![Figure 3: Settlement timeline](./images/figure3-timeline.png)
 
 Between $T_0$ and $T_M$ the protocol contains **no oracle path** that triggers forced action on borrower positions. All settlement is concentrated at and after $T_M$.
 
