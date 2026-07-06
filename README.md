@@ -72,7 +72,7 @@ The first excluded category is the *long-duration holder*: a treasury, family of
 
 For this borrower, the **expected cost of liquidation — conditional on a 50% intra-loan drawdown that recovers before maturity — can exceed the entire interest cost of the loan**. The economically rational response is to refuse the product, and the empirical response, historically, has been to seek bilateral OTC financing with structured downside protection.
 
-> [!IMPORTANT]
+> [!NOTE]
 > There is a common misconception that automated, oracle-triggered liquidations are the only way to protect lenders from volatile collateral. **This is empirically false.** For decades, bilateral OTC desks (Matrixport, Galaxy, Genesis, Cumberland) have offered non-margin BTC-backed loans by pricing the downside as an embedded option rather than by relying on forced sales. Awakening reproduces that payoff structure on a permissionless substrate.
 
 ### 2. The Predictable-Funding Borrower
@@ -98,7 +98,7 @@ This single change has substantial consequences:
 - **The advance rate (LTV) is no longer a function of expected volatility multiplied by a liquidation buffer.** It is a function of the strike chosen, full stop. Strikes can be set at 100% of spot or higher, because there is no liquidation event to defend against.
 - **The maker's quote is no longer constrained by their willingness to hold uncovered downside risk.** Sophisticated makers can hedge the option exposure on external venues — Deribit, Derive, IBIT-listed contracts, or bilateral OTC — and quote against the *net* funding cost.
 
-> [!IMPORTANT]
+> [!NOTE]
 > The put option is delivered by the maker at fill time, not sourced from a shared protocol pool. This decouples the protocol from the option origination venue and lets a single maker aggregate an option book across many Awakening markets simultaneously.
 
 ## Protocol Architecture
@@ -155,7 +155,7 @@ $$R(S_{T_M}) = \min(S_{T_M}, K) + \Pi(S_{T_M}) = K$$
 
 which is exactly the *maxDebt* of the loan. This identity, evaluated at any terminal price, is the algebraic source of the invariant.
 
-> [!IMPORTANT]
+> [!NOTE]
 > The identity $\min(S, K) + \max(K - S, 0) = K$ is the entire economic engine of Awakening. It holds at every terminal price $S_{T_M} \geq 0$. Nothing in the protocol depends on volatility assumptions, liquidation thresholds, or oracle behavior during the term.
 
 ### Attribution at Fill Time
