@@ -37,26 +37,26 @@ A brief overview of the terms used throughout this document. Awakening deliberat
 
 **Market Structure**
 
-- *Market* $M$: an isolated, immutable, permissionlessly created lending market, uniquely parameterized by a collateral asset, a loan asset, an oracle, a maturity $T_M$, a strike $K$, a settlement contract, and optional access-control gates.
-- *Credit unit*: a fungible on-chain claim held by a lender. Each credit unit pays one loan token at maturity when the non-liquidative invariant holds.
-- *Debt unit*: the symmetric obligation held by a borrower. One debt unit is a commitment to repay one loan token at maturity.
-- *Advance rate*: for a borrower posting one unit of collateral, the maximum debt that can be opened. Under Awakening, $\text{maxDebt} = K$; the advance rate is fixed by the strike, not by expected volatility.
+- **\<Market $M$\>**: an isolated, immutable, permissionlessly created lending market, uniquely parameterized by a collateral asset, a loan asset, an oracle, a maturity $T_M$, a strike $K$, a settlement contract, and optional access-control gates.
+- **\<Credit unit\>**: a fungible on-chain claim held by a lender. Each credit unit pays one loan token at maturity when the non-liquidative invariant holds.
+- **\<Debt unit\>**: the symmetric obligation held by a borrower. One debt unit is a commitment to repay one loan token at maturity.
+- **\<Advance rate\>**: for a borrower posting one unit of collateral, the maximum debt that can be opened. Under Awakening, $\text{maxDebt} = K$; the advance rate is fixed by the strike, not by expected volatility.
 
 **Option Attribution**
 
-- *Put Attribution Token (PAT)*: a fungible on-chain wrapper around a put option position whose strike, notional, and expiry are aligned to a market's parameters. Delivered by the maker at fill time and settled at $T_M$ against the market's oracle read.
-- *PAT source*: the origination venue of the put position wrapped by a PAT. Three canonical classes are supported: on-chain native, off-chain attested, and protocol-internal.
+- **\<Put Attribution Token (PAT)\>**: a fungible on-chain wrapper around a put option position whose strike, notional, and expiry are aligned to a market's parameters. Delivered by the maker at fill time and settled at $T_M$ against the market's oracle read.
+- **\<PAT source\>**: the origination venue of the put position wrapped by a PAT. Three canonical classes are supported: on-chain native, off-chain attested, and protocol-internal.
 
 **Roles**
 
-- *Maker*: an off-protocol participant that publishes executable offers and mediates between the market and one or more external option venues. Makers source both the loan tokens and the PAT at fill time via a callback.
-- *Borrower*: the on-chain participant who posts collateral and receives loan tokens (net of premium).
-- *Lender*: the on-chain participant who funds credit unit issuance and receives loan tokens at settlement.
+- **\<Maker\>**: an off-protocol participant that publishes executable offers and mediates between the market and one or more external option venues. Makers source both the loan tokens and the PAT at fill time via a callback.
+- **\<Borrower\>**: the on-chain participant who posts collateral and receives loan tokens (net of premium).
+- **\<Lender\>**: the on-chain participant who funds credit unit issuance and receives loan tokens at settlement.
 
 **Loan Term Types**
 
-- *Margin loan*: a collateralized loan subject to automated liquidation when collateral value falls below a threshold. The lender is protected by an oracle-driven liquidation path; the borrower bears path-dependent forced-sale risk.
-- *Non-liquidative loan*: a collateralized loan whose lender protection is furnished by an attached put option rather than by a liquidation path. The borrower is never subject to a margin call or forced unwind during the term of the loan.
+- **\<Margin loan\>**: a collateralized loan subject to automated liquidation when collateral value falls below a threshold. The lender is protected by an oracle-driven liquidation path; the borrower bears path-dependent forced-sale risk.
+- **\<Non-liquidative loan\>**: a collateralized loan whose lender protection is furnished by an attached put option rather than by a liquidation path. The borrower is never subject to a margin call or forced unwind during the term of the loan.
 
 ## Abstract
 
